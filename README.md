@@ -4,7 +4,7 @@ These are "firmware" sketches for embedded TurtleBro Arduino compatible controll
 
 ## Setup
 
-For uploading this sketches to embedded Arduino you need to make new ROS-library for Arduino onto TurtleBro RaspberyPI:
+For uploading this sketches to embedded Arduino you need to make new ROS-library for Arduino on TurtleBro RaspberyPI:
 ```
 cd 
 rosrun rosserial_arduino make_libraries.py
