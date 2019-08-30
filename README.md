@@ -13,4 +13,4 @@ This create ros_lib directory on RaspberyPI so you need to copy it to your PC (m
 
 ## Package install
 
-We provide TurtleBro with preinstalled Turtlebro pakkage, but if you are going to rebuil all, you need to reinstall Turtlebro and Joybro packages on your RaspberryPi
+We provide TurtleBro with preinstalled Turtlebro pakkage, but if you are going to rebuil all, you need to reinstall  "[Turtlebro](https://github.com/voltbro/turtlebro)" and "[Joybro](https://github.com/voltbro/joybro)" packages on your RaspberryPi
