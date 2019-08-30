@@ -1,10 +1,10 @@
 ## Description
 
-These are "firmware" sketches for embedded TurtleBro Arduino compatible controller. LOAD for servos. LED for FASTLed lib and parktronik sample. And JOY is for Arduino compatible joystik JoyBro
+These are "firmware" sketches for embedded TurtleBro Arduino compatible controller. LOAD for servos. LED for FASTLed lib and parktronik sample. And JOY is for Arduino compatible joystik JoyBro.
 
 ## Setup
 
-For uploading this sketches to embedded Arduino you need to make new ROS-library for Arduino on TurtleBro RaspberyPI:
+For uploading this sketches to embedded Arduino you need to make new ROS-library for Arduino on TurtleBro's RaspberyPI:
 ```
 cd 
 rosrun rosserial_arduino make_libraries.py
