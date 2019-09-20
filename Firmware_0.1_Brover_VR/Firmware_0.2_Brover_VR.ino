@@ -21,6 +21,10 @@ ros::NodeHandle_<NewHardware>  nh;
   int serv44;
   int serv45;
 
+  int head_offset_x = 90;
+  int head_offset_y = 90;
+  int clr_set = 0;
+
 Servo servo44;
 Servo servo45;
 Servo servo46;
@@ -31,11 +35,7 @@ void messageCb( const joybro::JoyBro& data){
 
     servo46.write(int((data.slider2/6)+3)); //arm up/down
 
-    if(data.btn1==1) //rover head zero pozition call
-    {
-      servo45.write(100);
-      servo44.write(75);
-    }
+    clr_set = data.btn1; //rover head zero_pozition_call write to global var
 
     
     if(data.slider1<=512) //rotation of drill settings
@@ -50,18 +50,25 @@ void messageCb( const joybro::JoyBro& data){
     }
 }
 
-ros::Subscriber<joybro::JoyBro> sub("joybro", &messageCb );
+ros::Subscriber<joybro::JoyBro> sub("joybro", &messageCb ); //ROS node 'Joybro' call
 
 
 //Roverhead ROS topic read function
 
 void messageCbR( const std_msgs::Int16MultiArray& data){
 
-    //servo44.write(int((data.slider1/6)+3));
-    serv45 = data.data[0];  //rover head up-down
-    serv44 = data.data[1]; // rover head left-rigth
+
+
+    serv45 = data.data[0] - head_offset_y + 90;  //rover head up-down
+    serv44 = data.data[1] - head_offset_x + 90; // rover head left-rigth
+
+    if (clr_set == 1)
+    {
+    head_offset_y =  data.data[0];  //rover head up-down global var offset update
+    head_offset_x = data.data[1]; // rover head left-rigth global var offset update
+    }
     
-    if (serv44 <= 0) //rover head settings
+    if (serv44 <= 0) //rover head settings left-rigth
     {
       if (serv44 <= -90)
       {
@@ -77,7 +84,7 @@ void messageCbR( const std_msgs::Int16MultiArray& data){
       serv44 = 180;
     }
  
-    if (serv45 <= 0)
+    if (serv45 <= 0) //rover head settings up-down
     {
       if (serv45 <= -90)
       {
@@ -95,11 +102,9 @@ void messageCbR( const std_msgs::Int16MultiArray& data){
 
       servo45.write(serv45); // rover head servo commands
       servo44.write(serv44);
-
-
 }
 
-ros::Subscriber<std_msgs::Int16MultiArray> subR("roverhead", &messageCbR );
+ros::Subscriber<std_msgs::Int16MultiArray> subR("roverhead", &messageCbR ); //ROS node 'roverhead' call
 
 
 void setup() {
